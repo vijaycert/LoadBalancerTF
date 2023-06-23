@@ -1,0 +1,15 @@
+base_name           = "TfAzLb"
+location            = "ukwest"
+vVnet_name          = "TfAzLbVnet"
+subnet_prefix       = ["10.0.1.0/24"]
+vVnet_address_space = ["10.0.0.0/16"]
+vSubnet_name        = "TfAzLbSubnet"
+vVM01_name          = "TfAzLbVM01"
+vVM02_name          = "TfAzLbVM02"
+vVM03_name          = "TfAzLbVM03"
+vVM_Nic01_name      = "TfAzLbNic01"
+vVM_Nic02_name      = "TfAzLbNic02"
+vVM_Nic03_name      = "TfAzLbNic03"
+pip01_name          = "TfAzLbPip01"
+pip02_name          = "TfAzLbPip02"
+pip03_name          = "TfAzLbPip03"
