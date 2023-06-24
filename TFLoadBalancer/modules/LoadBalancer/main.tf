@@ -47,9 +47,9 @@ resource "azurerm_lb_nat_rule" "TfAzLbNATRule" {
   resource_group_name            = var.resource_group_name
   loadbalancer_id                = azurerm_lb.TfAzLoadBalancer.id
   name                           = "RDPAccess"
-  protocol                       = "Tcp"
+  protocol                       = "Udp"
   frontend_port_start            = 3000
-  frontend_port_end              = 3389
+  frontend_port_end              = 3388
   backend_port                   = 3390
   backend_address_pool_id        = azurerm_lb_backend_address_pool.TfAzLbBackendPool.id
   frontend_ip_configuration_name = azurerm_lb.TfAzLoadBalancer.frontend_ip_configuration[0].name
@@ -61,7 +61,9 @@ resource "azurerm_lb_nat_rule" "TfAzLbNATRule" {
 resource "azurerm_lb_probe" "TfAzLbProbe" {
   loadbalancer_id = azurerm_lb.TfAzLoadBalancer.id
   name            = "ssh-running-probe"
-  port            = 22
+  protocol = "Http"
+  request_path = "/"
+  port            = 80
 
   depends_on = [ azurerm_lb.TfAzLoadBalancer ]
 }
@@ -70,8 +72,8 @@ resource "azurerm_lb_rule" "TfAzLbRule" {
   loadbalancer_id                = azurerm_lb.TfAzLoadBalancer.id
   name                           = "LBRule1"
   protocol                       = "Tcp"
-  frontend_port                  = 3389
-  backend_port                   = 3390
+  frontend_port                  = 80
+  backend_port                   = 80
   frontend_ip_configuration_name = azurerm_lb.TfAzLoadBalancer.frontend_ip_configuration[0].name
 
   depends_on = [ azurerm_lb.TfAzLoadBalancer ]
